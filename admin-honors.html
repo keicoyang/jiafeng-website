@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>荣誉管理 - 上海嘉丰物业管理有限公司</title>
+    <title>资质管理 - 上海嘉丰物业管理有限公司</title>
     <style>
         /* 重置样式 */
         * {
@@ -72,8 +72,8 @@
             background: var(--hover-blue);
         }
 
-        /* 荣誉列表表格 */
-        .honors-table {
+        /* 资质列表表格 */
+        .qualifications-table {
             width: 100%;
             background: white;
             border-radius: 8px;
@@ -82,20 +82,28 @@
             margin-bottom: 30px;
         }
 
-        .honors-table th,
-        .honors-table td {
+        .qualifications-table th,
+        .qualifications-table td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .honors-table th {
+        .qualifications-table th {
             background: var(--primary-color);
             color: var(--light-text);
         }
 
-        .honors-table tr:hover {
+        .qualifications-table tr:hover {
             background: var(--light-blue);
+        }
+
+        .qualification-image {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         /* 按钮样式 */
@@ -128,7 +136,7 @@
         }
 
         /* 表单样式 */
-        .honor-form {
+        .qualification-form {
             background: white;
             padding: 20px;
             border-radius: 8px;
@@ -184,6 +192,16 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+
+        /* 图片预览样式 */
+        .image-preview {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -202,11 +220,11 @@
 
     <div class="container">
         <header class="admin-header">
-            <h1 class="admin-title">荣誉管理</h1>
+            <h1 class="admin-title">资质管理</h1>
             <nav class="admin-nav">
-                <a href="admin-projects.html">项目管理</a>
+                <a href="admin-projects.html">案例管理</a>
                 <a href="admin-news.html">新闻管理</a>
-                <a href="admin-honors.html" class="active">荣誉管理</a>
+                <a href="admin-honors.html" class="active">资质管理</a>
                 <a href="about.html" target="_blank">查看前台页面</a>
                 <a href="#" onclick="logout()">退出登录</a>
             </nav>
@@ -214,23 +232,28 @@
 
         <div id="message" class="message"></div>
 
-        <button class="btn btn-add" onclick="showAddForm()">添加荣誉</button>
+        <button class="btn btn-add" onclick="showAddForm()">添加资质</button>
 
-        <div id="honorForm" class="honor-form">
-            <h2 id="formTitle">添加荣誉</h2>
-            <form id="addHonorForm" onsubmit="handleSubmit(event)">
-                <input type="hidden" id="honorId">
+        <div id="qualificationForm" class="qualification-form">
+            <h2 id="formTitle">添加资质</h2>
+            <form id="addQualificationForm" onsubmit="handleSubmit(event)">
+                <input type="hidden" id="qualificationId">
                 <div class="form-group">
-                    <label for="honorTitle">荣誉名称</label>
-                    <input type="text" id="honorTitle" required>
+                    <label for="qualificationTitle">资质名称</label>
+                    <input type="text" id="qualificationTitle" required>
                 </div>
                 <div class="form-group">
-                    <label for="honorDate">获得日期</label>
-                    <input type="date" id="honorDate" required>
+                    <label for="qualificationSubtitle">资质副标题</label>
+                    <input type="text" id="qualificationSubtitle" required>
                 </div>
                 <div class="form-group">
-                    <label for="honorDescription">荣誉描述</label>
-                    <textarea id="honorDescription" required></textarea>
+                    <label for="qualificationDescription">资质描述</label>
+                    <textarea id="qualificationDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="qualificationImage">资质图片</label>
+                    <input type="file" id="qualificationImage" accept="image/*" onchange="previewImage(event)">
+                    <img id="imagePreview" class="image-preview">
                 </div>
                 <div class="form-buttons">
                     <button type="button" class="btn btn-delete" onclick="hideForm()">取消</button>
@@ -239,83 +262,141 @@
             </form>
         </div>
 
-        <table class="honors-table">
+        <table class="qualifications-table">
             <thead>
                 <tr>
-                    <th>荣誉名称</th>
-                    <th>获得日期</th>
+                    <th>资质图片</th>
+                    <th>资质名称</th>
                     <th>操作</th>
                 </tr>
             </thead>
-            <tbody id="honorsList">
-                <!-- 荣誉列表将通过JavaScript动态加载 -->
+            <tbody id="qualificationsList">
+                <!-- 资质列表将通过JavaScript动态加载 -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // 从localStorage获取荣誉数据，如果没有则使用默认数据
-        let honors = JSON.parse(localStorage.getItem('honors')) || [
+        // 默认资质数据
+        const defaultQualifications = [
             {
                 id: 1,
-                title: '2023年度优秀物业服务企业',
-                date: '2023-12-25',
-                description: '在2023年度物业服务企业评选中，上海嘉丰物业管理有限公司凭借优质的服务和良好的口碑，荣获"优秀物业服务企业"称号。'
+                title: '物业服务企业资质证书',
+                subtitle: '国家物业管理三级资质',
+                description: '国家物业管理三级资质，具备专业的物业服务能力和管理水平。',
+                image: 'images/qualification1.jpg'
+            },
+            {
+                id: 2,
+                title: 'ISO9001质量管理体系认证',
+                subtitle: '质量管理体系认证证书',
+                description: '通过ISO9001质量管理体系认证，确保服务质量的持续提升。',
+                image: 'images/qualification2.jpg'
+            },
+            {
+                id: 3,
+                title: '安全生产许可证',
+                subtitle: '物业服务安全生产认证',
+                description: '具备完善的安全生产管理体系，确保物业服务安全运营。',
+                image: 'images/qualification3.jpg'
+            },
+            {
+                id: 4,
+                title: '环境管理体系认证',
+                subtitle: 'ISO14001环境管理体系认证',
+                description: '通过ISO14001环境管理体系认证，践行绿色物业管理理念。',
+                image: 'images/qualification4.jpg'
             }
         ];
 
-        // 显示荣誉列表
-        function renderHonors() {
-            const honorsList = document.getElementById('honorsList');
-            honorsList.innerHTML = '';
+        // 从localStorage获取资质数据，如果没有则使用默认数据
+        let qualifications = JSON.parse(localStorage.getItem('qualifications')) || defaultQualifications;
+        if (!localStorage.getItem('qualifications')) {
+            localStorage.setItem('qualifications', JSON.stringify(defaultQualifications));
+        }
+
+        // 显示资质列表
+        function renderQualifications() {
+            const qualificationsList = document.getElementById('qualificationsList');
+            qualificationsList.innerHTML = '';
             
-            honors.forEach(item => {
+            qualifications.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${item.title}</td>
-                    <td>${item.date}</td>
+                    <td><img src="${item.image}" alt="${item.title}" class="qualification-image" onerror="this.src='images/default.jpg'"></td>
                     <td>
-                        <button class="btn btn-edit" onclick="editHonor(${item.id})">编辑</button>
-                        <button class="btn btn-delete" onclick="deleteHonor(${item.id})">删除</button>
+                        <div><strong>${item.title}</strong></div>
+                        <div style="color: #666; font-size: 14px;">${item.subtitle}</div>
+                    </td>
+                    <td>
+                        <button class="btn btn-edit" onclick="editQualification(${item.id})">编辑</button>
+                        <button class="btn btn-delete" onclick="deleteQualification(${item.id})">删除</button>
                     </td>
                 `;
-                honorsList.appendChild(tr);
+                qualificationsList.appendChild(tr);
             });
+        }
+
+        // 图片预览
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         }
 
         // 显示添加表单
         function showAddForm() {
-            document.getElementById('formTitle').textContent = '添加荣誉';
-            document.getElementById('honorForm').style.display = 'block';
-            document.getElementById('honorId').value = '';
-            document.getElementById('addHonorForm').reset();
+            document.getElementById('formTitle').textContent = '添加资质';
+            document.getElementById('qualificationForm').style.display = 'block';
+            document.getElementById('qualificationId').value = '';
+            document.getElementById('addQualificationForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('qualificationImage').required = true;
         }
 
         // 隐藏表单
         function hideForm() {
-            document.getElementById('honorForm').style.display = 'none';
+            document.getElementById('qualificationForm').style.display = 'none';
         }
 
-        // 编辑荣誉
-        function editHonor(id) {
-            const honorItem = honors.find(item => item.id === id);
-            if (honorItem) {
-                document.getElementById('formTitle').textContent = '编辑荣誉';
-                document.getElementById('honorId').value = id;
-                document.getElementById('honorTitle').value = honorItem.title;
-                document.getElementById('honorDate').value = honorItem.date;
-                document.getElementById('honorDescription').value = honorItem.description;
-                document.getElementById('honorForm').style.display = 'block';
+        // 编辑资质
+        function editQualification(id) {
+            const qualificationItem = qualifications.find(item => item.id === id);
+            if (qualificationItem) {
+                document.getElementById('formTitle').textContent = '编辑资质';
+                document.getElementById('qualificationId').value = id;
+                document.getElementById('qualificationTitle').value = qualificationItem.title;
+                document.getElementById('qualificationSubtitle').value = qualificationItem.subtitle;
+                document.getElementById('qualificationDescription').value = qualificationItem.description;
+                
+                // 显示当前图片
+                const preview = document.getElementById('imagePreview');
+                preview.src = qualificationItem.image;
+                preview.style.display = 'block';
+                
+                // 编辑时图片不是必需的
+                document.getElementById('qualificationImage').required = false;
+                
+                document.getElementById('qualificationForm').style.display = 'block';
             }
         }
 
-        // 删除荣誉
-        function deleteHonor(id) {
-            if (confirm('确定要删除这个荣誉吗？')) {
-                honors = honors.filter(item => item.id !== id);
-                localStorage.setItem('honors', JSON.stringify(honors));
-                showMessage('荣誉已删除', 'success');
-                renderHonors();
+        // 删除资质
+        function deleteQualification(id) {
+            if (confirm('确定要删除这个资质吗？')) {
+                qualifications = qualifications.filter(item => item.id !== id);
+                localStorage.setItem('qualifications', JSON.stringify(qualifications));
+                showMessage('资质已删除', 'success');
+                renderQualifications();
             }
         }
 
@@ -323,27 +404,52 @@
         function handleSubmit(event) {
             event.preventDefault();
             
-            const id = document.getElementById('honorId').value;
-            const title = document.getElementById('honorTitle').value;
-            const date = document.getElementById('honorDate').value;
-            const description = document.getElementById('honorDescription').value;
+            const id = document.getElementById('qualificationId').value;
+            const title = document.getElementById('qualificationTitle').value;
+            const subtitle = document.getElementById('qualificationSubtitle').value;
+            const description = document.getElementById('qualificationDescription').value;
+            const imageFile = document.getElementById('qualificationImage').files[0];
             
-            if (id) {
-                // 编辑现有荣誉
-                const index = honors.findIndex(item => item.id === parseInt(id));
-                if (index !== -1) {
-                    honors[index] = { id: parseInt(id), title, date, description };
-                }
+            let image;
+            if (imageFile) {
+                // 如果上传了新图片，使用新图片
+                image = document.getElementById('imagePreview').src;
+            } else if (id) {
+                // 如果是编辑且没有上传新图片，保持原图
+                image = qualifications.find(item => item.id === parseInt(id)).image;
             } else {
-                // 添加新荣誉
-                const newId = honors.length > 0 ? Math.max(...honors.map(item => item.id)) + 1 : 1;
-                honors.push({ id: newId, title, date, description });
+                // 如果是新增且没有上传图片，使用默认图片
+                image = 'images/default.jpg';
             }
             
-            localStorage.setItem('honors', JSON.stringify(honors));
-            showMessage(id ? '荣誉已更新' : '荣誉已添加', 'success');
+            if (id) {
+                // 编辑现有资质
+                const index = qualifications.findIndex(item => item.id === parseInt(id));
+                if (index !== -1) {
+                    qualifications[index] = { 
+                        id: parseInt(id), 
+                        title, 
+                        subtitle,
+                        description,
+                        image
+                    };
+                }
+            } else {
+                // 添加新资质
+                const newId = qualifications.length > 0 ? Math.max(...qualifications.map(item => item.id)) + 1 : 1;
+                qualifications.push({ 
+                    id: newId, 
+                    title, 
+                    subtitle,
+                    description,
+                    image 
+                });
+            }
+            
+            localStorage.setItem('qualifications', JSON.stringify(qualifications));
+            showMessage(id ? '资质已更新' : '资质已添加', 'success');
             hideForm();
-            renderHonors();
+            renderQualifications();
         }
 
         // 显示提示消息
@@ -358,8 +464,8 @@
             }, 3000);
         }
 
-        // 初始化显示荣誉列表
-        renderHonors();
+        // 初始化显示资质列表
+        renderQualifications();
     </script>
 </body>
 </html> 

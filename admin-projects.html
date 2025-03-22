@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在管项目管理 - 上海嘉丰物业管理有限公司</title>
+    <title>成功案例管理 - 上海嘉丰物业管理有限公司</title>
     <style>
         /* 重置样式 */
         * {
@@ -197,11 +197,11 @@
 
     <div class="container">
         <header class="admin-header">
-            <h1 class="admin-title">在管项目管理</h1>
+            <h1 class="admin-title">成功案例管理</h1>
             <nav class="admin-nav">
-                <a href="admin-projects.html" class="active">项目管理</a>
+                <a href="admin-projects.html" class="active">案例管理</a>
                 <a href="admin-news.html">新闻管理</a>
-                <a href="admin-honors.html">荣誉管理</a>
+                <a href="admin-honors.html">资质管理</a>
                 <a href="projects.html" target="_blank">查看前台页面</a>
                 <a href="#" onclick="logout()">退出登录</a>
             </nav>
@@ -209,14 +209,14 @@
 
         <div id="message" class="message"></div>
 
-        <button class="btn btn-add" onclick="showAddForm()">添加新项目</button>
+        <button class="btn btn-add" onclick="showAddForm()">添加新案例</button>
 
         <div id="projectForm" class="project-form">
-            <h2 id="formTitle">添加新项目</h2>
+            <h2 id="formTitle">添加新案例</h2>
             <form id="addProjectForm" onsubmit="handleSubmit(event)">
                 <input type="hidden" id="projectId">
                 <div class="form-group">
-                    <label for="projectName">项目名称</label>
+                    <label for="projectName">案例名称</label>
                     <input type="text" id="projectName" required>
                 </div>
                 <div class="form-group">
@@ -241,7 +241,7 @@
         <table class="projects-table">
             <thead>
                 <tr>
-                    <th>项目名称</th>
+                    <th>案例名称</th>
                     <th>地址</th>
                     <th>建筑面积</th>
                     <th>物业类型</th>
@@ -315,7 +315,7 @@
 
         // 显示添加表单
         function showAddForm() {
-            document.getElementById('formTitle').textContent = '添加新项目';
+            document.getElementById('formTitle').textContent = '添加新案例';
             document.getElementById('projectId').value = '';
             document.getElementById('projectForm').style.display = 'block';
             document.getElementById('addProjectForm').reset();
@@ -330,7 +330,7 @@
         function editProject(id) {
             const project = projects.find(p => p.id === id);
             if (project) {
-                document.getElementById('formTitle').textContent = '编辑项目';
+                document.getElementById('formTitle').textContent = '编辑案例';
                 document.getElementById('projectId').value = project.id;
                 document.getElementById('projectName').value = project.name;
                 document.getElementById('projectAddress').value = project.address;
@@ -342,11 +342,11 @@
 
         // 删除项目
         function deleteProject(id) {
-            if (confirm('确定要删除这个项目吗？')) {
+            if (confirm('确定要删除这个案例吗？')) {
                 projects = projects.filter(p => p.id !== id);
                 saveToLocalStorage(); // 保存更改
                 renderProjects();
-                showMessage('项目已成功删除', 'success');
+                showMessage('案例已成功删除', 'success');
             }
         }
 
@@ -364,13 +364,13 @@
             };
 
             if (id) {
-                // 更新现有项目
+                // 更新现有案例
                 projects = projects.map(p => p.id === parseInt(id) ? newProject : p);
-                showMessage('项目已成功更新', 'success');
+                showMessage('案例已成功更新', 'success');
             } else {
-                // 添加新项目
+                // 添加新案例
                 projects.push(newProject);
-                showMessage('新项目已成功添加', 'success');
+                showMessage('新案例已成功添加', 'success');
             }
 
             saveToLocalStorage(); // 保存更改

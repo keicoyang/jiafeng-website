@@ -167,8 +167,8 @@
             border-radius: 3px;
         }
 
-        /* 荣誉展示 */
-        .honors-section {
+        /* 资质展示 */
+        .qualifications-section {
             margin: 40px 0;
             padding: 20px;
             background-color: #fff;
@@ -176,52 +176,70 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .honors-section h2 {
-            color: #333;
+        .qualifications-section h2 {
+            color: var(--primary-color);
             margin-bottom: 30px;
             text-align: center;
             font-size: 24px;
+            position: relative;
+            padding-bottom: 15px;
         }
 
-        .honors-list {
+        .qualifications-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .qualifications-grid {
             display: grid;
-            gap: 20px;
-        }
-
-        .honor-item {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
             padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
         }
 
-        .honor-item:hover {
+        .qualification-item {
+            display: flex;
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .qualification-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .honor-title {
-            color: #2c3e50;
+        .qualification-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+
+        .qualification-content {
+            flex: 1;
+        }
+
+        .qualification-title {
+            color: var(--primary-color);
             font-size: 18px;
             margin-bottom: 10px;
+            font-weight: bold;
         }
 
-        .honor-date {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .honor-description {
-            color: #555;
+        .qualification-description {
+            color: var(--text-color);
             line-height: 1.6;
-        }
-
-        .no-content {
-            text-align: center;
-            color: #666;
-            padding: 20px;
-            font-style: italic;
+            font-size: 14px;
         }
 
         /* 页脚样式 */
@@ -261,8 +279,8 @@
                 <ul class="nav-menu">
                     <li><a href="index.html">首页</a></li>
                     <li><a href="about.html" class="active">关于我们</a></li>
-                    <li><a href="services.html">服务产品</a></li>
-                    <li><a href="projects.html">在管项目</a></li>
+                    <li><a href="services.html">解决方案</a></li>
+                    <li><a href="projects.html">成功案例</a></li>
                     <li><a href="news.html">新闻动态</a></li>
                     <li><a href="contact.html">联系我们</a></li>
                 </ul>
@@ -280,10 +298,10 @@
             <p>公司始终坚持"以人为本，服务至上"的经营理念，通过不断创新服务模式，引入智能化管理系统，努力为业主创造安全、舒适、温馨的生活环境。</p>
         </div>
 
-        <div class="honors-section">
-            <h2>公司荣誉</h2>
-            <div class="honors-list" id="honorsList">
-                <!-- 荣誉列表将通过JavaScript动态加载 -->
+        <div class="qualifications-section">
+            <h2>公司资质</h2>
+            <div class="qualifications-grid" id="qualificationsList">
+                <!-- 资质列表将通过JavaScript动态加载 -->
             </div>
         </div>
     </div>
@@ -295,67 +313,59 @@
     </footer>
 
     <script>
-        // 默认荣誉数据
-        const defaultHonors = [
+        // 从localStorage获取资质数据
+        const qualifications = JSON.parse(localStorage.getItem('qualifications')) || [
             {
-                title: "上海市物业服务企业综合服务能力等级评定AAA级",
-                date: "2023-12-15",
-                description: "经上海市物业管理行业协会评定，我司荣获AAA级物业服务企业称号，这是对我们服务质量的最高肯定。"
+                id: 1,
+                title: '物业服务企业资质证书',
+                subtitle: '国家物业管理三级资质',
+                description: '国家物业管理三级资质，具备专业的物业服务能力和管理水平。',
+                image: 'images/qualification1.jpg'
             },
             {
-                title: "2023年度上海市优秀物业服务企业",
-                date: "2023-11-20",
-                description: "凭借优质的服务和创新的管理模式，公司获得上海市住房和城乡建设管理委员会颁发的优秀物业服务企业称号。"
+                id: 2,
+                title: 'ISO9001质量管理体系认证',
+                subtitle: '质量管理体系认证证书',
+                description: '通过ISO9001质量管理体系认证，确保服务质量的持续提升。',
+                image: 'images/qualification2.jpg'
             },
             {
-                title: "2023年度客户满意度五星级企业",
-                date: "2023-10-01",
-                description: "在年度客户满意度调查中，我司以98.5%的满意率获得五星级评价，展现了我们对服务品质的不懈追求。"
+                id: 3,
+                title: '安全生产许可证',
+                subtitle: '物业服务安全生产认证',
+                description: '具备完善的安全生产管理体系，确保物业服务安全运营。',
+                image: 'images/qualification3.jpg'
+            },
+            {
+                id: 4,
+                title: '环境管理体系认证',
+                subtitle: 'ISO14001环境管理体系认证',
+                description: '通过ISO14001环境管理体系认证，践行绿色物业管理理念。',
+                image: 'images/qualification4.jpg'
             }
         ];
 
-        // 从localStorage获取荣誉数据，如果没有则使用默认数据
-        const honors = JSON.parse(localStorage.getItem('honors')) || defaultHonors;
-        if (!localStorage.getItem('honors')) {
-            localStorage.setItem('honors', JSON.stringify(defaultHonors));
-        }
-
-        // 显示荣誉列表
-        function renderHonors() {
-            const honorsList = document.getElementById('honorsList');
-            honorsList.innerHTML = '';
-
-            // 按日期降序排序荣誉
-            const sortedHonors = honors.sort((a, b) => new Date(b.date) - new Date(a.date));
+        // 显示资质列表
+        function renderQualifications() {
+            const qualificationsList = document.getElementById('qualificationsList');
+            qualificationsList.innerHTML = '';
             
-            if (sortedHonors.length === 0) {
-                honorsList.innerHTML = '<div class="no-content">暂无荣誉记录</div>';
-                return;
-            }
-
-            sortedHonors.forEach(item => {
-                const honorItem = document.createElement('div');
-                honorItem.className = 'honor-item';
-                
-                // 格式化日期
-                const date = new Date(item.date);
-                const formattedDate = date.toLocaleDateString('zh-CN', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                honorItem.innerHTML = `
-                    <h3 class="honor-title">${item.title}</h3>
-                    <div class="honor-date">${formattedDate}</div>
-                    <div class="honor-description">${item.description}</div>
+            qualifications.forEach(item => {
+                const qualificationItem = document.createElement('div');
+                qualificationItem.className = 'qualification-item';
+                qualificationItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="qualification-image" onerror="this.src='images/default.jpg'">
+                    <div class="qualification-content">
+                        <div class="qualification-title">${item.title}</div>
+                        <div class="qualification-description">${item.description}</div>
+                    </div>
                 `;
-                honorsList.appendChild(honorItem);
+                qualificationsList.appendChild(qualificationItem);
             });
         }
 
-        // 初始化显示荣誉列表
-        renderHonors();
+        // 初始化显示资质列表
+        renderQualifications();
     </script>
 </body>
 </html>

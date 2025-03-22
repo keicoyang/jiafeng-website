@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>生成资质证书</title>
+    <style>
+        .certificate {
+            width: 600px;
+            height: 400px;
+            background: linear-gradient(45deg, #f5f5f5, #ffffff);
+            border: 2px solid #003366;
+            position: relative;
+            margin: 20px;
+            padding: 40px;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .certificate-title {
+            font-size: 28px;
+            color: #003366;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .certificate-subtitle {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .certificate-content {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .certificate-seal {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #cc0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cc0000;
+            font-weight: bold;
+            transform: rotate(-15deg);
+        }
+
+        .certificate-number {
+            position: absolute;
+            bottom: 20px;
+            left: 40px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .certificate-date {
+            position: absolute;
+            bottom: 50px;
+            left: 40px;
+            color: #333;
+        }
+
+        #certificates {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="certificates">
+        <div class="certificate" id="cert1">
+            <div class="certificate-header">
+                <div class="certificate-title">物业服务企业资质证书</div>
+                <div class="certificate-subtitle">国家物业管理三级资质</div>
+            </div>
+            <div class="certificate-content">
+                兹证明<br><br>
+                <strong>上海嘉丰物业管理有限公司</strong><br><br>
+                符合物业服务企业三级资质标准<br>
+                特发此证
+            </div>
+            <div class="certificate-date">发证日期：2023年12月15日</div>
+            <div class="certificate-number">证书编号：WY-2023-1215</div>
+            <div class="certificate-seal">资质认证</div>
+        </div>
+
+        <div class="certificate" id="cert2">
+            <div class="certificate-header">
+                <div class="certificate-title">ISO9001质量管理体系认证</div>
+                <div class="certificate-subtitle">质量管理体系认证证书</div>
+            </div>
+            <div class="certificate-content">
+                兹证明<br><br>
+                <strong>上海嘉丰物业管理有限公司</strong><br><br>
+                质量管理体系符合ISO9001:2015标准<br>
+                特发此证
+            </div>
+            <div class="certificate-date">发证日期：2023年11月20日</div>
+            <div class="certificate-number">证书编号：ISO9001-2023-1120</div>
+            <div class="certificate-seal">ISO认证</div>
+        </div>
+
+        <div class="certificate" id="cert3">
+            <div class="certificate-header">
+                <div class="certificate-title">安全生产许可证</div>
+                <div class="certificate-subtitle">物业服务安全生产认证</div>
+            </div>
+            <div class="certificate-content">
+                兹证明<br><br>
+                <strong>上海嘉丰物业管理有限公司</strong><br><br>
+                符合安全生产标准要求<br>
+                特发此证
+            </div>
+            <div class="certificate-date">发证日期：2023年10月01日</div>
+            <div class="certificate-number">证书编号：AQ-2023-1001</div>
+            <div class="certificate-seal">安全认证</div>
+        </div>
+
+        <div class="certificate" id="cert4">
+            <div class="certificate-header">
+                <div class="certificate-title">环境管理体系认证</div>
+                <div class="certificate-subtitle">ISO14001环境管理体系认证</div>
+            </div>
+            <div class="certificate-content">
+                兹证明<br><br>
+                <strong>上海嘉丰物业管理有限公司</strong><br><br>
+                环境管理体系符合ISO14001:2015标准<br>
+                特发此证
+            </div>
+            <div class="certificate-date">发证日期：2023年09月15日</div>
+            <div class="certificate-number">证书编号：ISO14001-2023-0915</div>
+            <div class="certificate-seal">环境认证</div>
+        </div>
+    </div>
+
+    <script>
+        function downloadCertificates() {
+            const certificates = document.querySelectorAll('.certificate');
+            certificates.forEach((cert, index) => {
+                html2canvas(cert).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `qualification${index + 1}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.9);
+                    link.click();
+                });
+            });
+        }
+    </script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <button onclick="downloadCertificates()" style="position: fixed; top: 20px; right: 20px; padding: 10px 20px;">下载所有证书</button>
+</body>
+</html> 
