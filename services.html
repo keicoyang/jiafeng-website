@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务产品 - 上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;    /* 深蓝色主色调 */
+            --secondary-color: #cc0000;  /* 红色强调色 */
+            --accent-color: #990000;     /* 深红色点缀 */
+            --light-blue: #e6f0ff;      /* 浅蓝色背景 */
+            --hover-blue: #004d99;      /* 悬停时的深蓝色 */
+            --text-color: #333333;      /* 主要文字颜色 */
+            --light-text: #ffffff;      /* 浅色文字 */
+            --border-color: #cccccc;    /* 边框颜色 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* 布局 */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏 */
+        .header {
+            background: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        /* 服务页面样式 */
+        .services-section {
+            padding: 60px 0;
+            background: var(--light-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .services-section h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .service-category {
+            background: #fff;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .service-category h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .service-item {
+            background: var(--light-blue);
+            padding: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(153, 0, 0, 0.1);
+        }
+
+        .service-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .service-item p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <img src="images/logo.png" alt="上海嘉丰物业管理有限公司">
+                    <span class="nav-logo-text">上海嘉丰物业管理有限公司</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="services.html" class="active">服务产品</a></li>
+                    <li><a href="projects.html">在管项目</a></li>
+                    <li><a href="news.html">新闻动态</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="services-section">
+        <div class="container">
+            <h1>服务产品</h1>
+            
+            <div class="service-category">
+                <h2>住宅物业服务</h2>
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3>秩序维护</h3>
+                        <p>24小时安保服务，门禁管理，巡逻巡查，确保小区安全。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>环境保洁</h3>
+                        <p>公共区域清洁，绿化养护，营造整洁舒适的环境。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>设备维护</h3>
+                        <p>水电维修，设备保养，确保设施正常运行。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>客户服务</h3>
+                        <p>24小时服务热线，快速响应业主需求。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h2>商业物业服务</h2>
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3>写字楼管理</h3>
+                        <p>提供专业的写字楼物业管理服务，创造良好的办公环境。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>商铺管理</h3>
+                        <p>商业环境维护，客流管理，提升商业价值。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>停车场管理</h3>
+                        <p>规范化管理停车场，提供便捷的停车服务。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>设施运营</h3>
+                        <p>商业设施的日常运营和维护管理。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h2>前期物业服务</h2>
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3>前期介入</h3>
+                        <p>项目前期的物业管理规划和服务方案制定。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>顾问管理</h3>
+                        <p>提供专业的物业管理咨询和顾问服务。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>交付服务</h3>
+                        <p>协助项目平稳交付，确保业主满意。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>品质把控</h3>
+                        <p>严格的品质管理体系，确保服务质量。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <p>电话：021-XXXXXXXX</p>
+                    <p>邮箱：service@jiafeng.com</p>
+                    <p>地址：上海市闵行区七莘路3599弄4号509室</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 上海嘉丰物业管理有限公司 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

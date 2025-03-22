@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;    /* 深蓝色主色调 */
+            --secondary-color: #cc0000;  /* 红色强调色 */
+            --accent-color: #990000;     /* 深红色点缀 */
+            --light-blue: #e6f0ff;      /* 浅蓝色背景 */
+            --hover-blue: #004d99;      /* 悬停时的深蓝色 */
+            --text-color: #333333;      /* 主要文字颜色 */
+            --light-text: #ffffff;      /* 浅色文字 */
+            --border-color: #cccccc;    /* 边框颜色 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* 布局 */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏 */
+        .header {
+            background: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        /* 联系我们页面样式 */
+        .contact-section {
+            padding: 60px 0;
+            background: var(--light-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-section h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .contact-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-map {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-map h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .contact-map h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 18px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .company-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
+            display: block;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-button {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(153, 0, 0, 0.2);
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 地图容器样式 */
+        .map-section {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #baiduMap {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 15px;
+            display: block;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+    <!-- 移除 Leaflet 相关代码 -->
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <img src="images/logo.png" alt="上海嘉丰物业管理有限公司">
+                    <span class="nav-logo-text">上海嘉丰物业管理有限公司</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="services.html">服务产品</a></li>
+                    <li><a href="projects.html">在管项目</a></li>
+                    <li><a href="news.html">新闻动态</a></li>
+                    <li><a href="contact.html" class="active">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="container">
+            <h1>联系我们</h1>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>联系方式</h2>
+                    <p><strong>办公地点：</strong>上海市闵行区虹莘路3996弄D栋</p>
+                    <p><strong>电话：</strong>021-64787897</p>
+                    <p><strong>邮箱：</strong>service@jiafeng.com</p>
+                    <div class="contact-map">
+                        <h3>公司位置</h3>
+                        <img src="images/company.png" alt="公司位置" class="company-image">
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2>在线留言</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">电话</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">留言内容</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">提交留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <p>电话：021-64787897</p>
+                    <p>邮箱：service@jiafeng.com</p>
+                    <p>地址：上海市闵行区虹莘路3996弄D栋</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 上海嘉丰物业管理有限公司 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

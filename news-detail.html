@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻详情 - 上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;    /* 深蓝色主色调 */
+            --secondary-color: #cc0000;  /* 红色强调色 */
+            --accent-color: #990000;     /* 深红色点缀 */
+            --light-blue: #e6f0ff;      /* 浅蓝色背景 */
+            --hover-blue: #004d99;      /* 悬停时的深蓝色 */
+            --text-color: #333333;      /* 主要文字颜色 */
+            --light-text: #ffffff;      /* 浅色文字 */
+            --border-color: #cccccc;    /* 边框颜色 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* 布局 */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏 */
+        .header {
+            background: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        /* 新闻详情页样式 */
+        .news-detail-section {
+            padding: 60px 0;
+            background: var(--light-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-detail-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .news-detail-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .news-detail-title {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .news-detail-meta {
+            color: var(--accent-color);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .news-detail-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .news-detail-text {
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .news-detail-text p {
+            margin-bottom: 20px;
+        }
+
+        .back-to-news {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-news:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <img src="images/logo.png" alt="上海嘉丰物业管理有限公司">
+                    <span class="nav-logo-text">上海嘉丰物业管理有限公司</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="services.html">服务项目</a></li>
+                    <li><a href="news.html" class="active">新闻动态</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="news-detail-section">
+        <div class="container">
+            <div class="news-detail-content">
+                <div class="news-detail-header">
+                    <h1 class="news-detail-title">公司荣获"上海市物业服务优秀企业"称号</h1>
+                    <div class="news-detail-meta">
+                        <span>发布时间：2024-03-15</span>
+                        <span>浏览次数：1280</span>
+                    </div>
+                </div>
+                <img src="images/news1.jpg" alt="新闻图片" class="news-detail-image">
+                <div class="news-detail-text">
+                    <p>近日，在上海市物业管理行业协会举办的2024年度物业服务企业评选活动中，我司凭借优质的服务和良好的口碑，荣获"上海市物业服务优秀企业"称号。这是对我们长期以来坚持高质量服务的肯定和鼓励。</p>
+                    <p>获此殊荣，是对我司在物业服务领域的专业能力和服务水平的高度认可。我们将继续秉持"专业、诚信、创新、共赢"的服务理念，不断提升服务品质，为业主提供更优质的物业服务。</p>
+                    <p>在未来，我们将：</p>
+                    <p>1. 持续提升服务质量，优化服务流程</p>
+                    <p>2. 加强员工培训，提高服务技能</p>
+                    <p>3. 引入智能化管理系统，提升管理效率</p>
+                    <p>4. 创新服务模式，满足业主多样化需求</p>
+                    <p>我们相信，通过不断努力和创新，必将为业主创造更加舒适、安全的生活环境，实现物业服务的新突破。</p>
+                </div>
+                <a href="news.html" class="back-to-news">返回新闻列表</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <p>电话：021-XXXXXXXX</p>
+                    <p>邮箱：service@jiafeng.com</p>
+                    <p>地址：上海市闵行区七莘路3599弄4号509室</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 上海嘉丰物业管理有限公司 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在管项目 - 上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;    /* 深蓝色主色调 */
+            --secondary-color: #cc0000;  /* 红色强调色 */
+            --accent-color: #990000;     /* 深红色点缀 */
+            --light-blue: #e6f0ff;      /* 浅蓝色背景 */
+            --hover-blue: #004d99;      /* 悬停时的深蓝色 */
+            --text-color: #333333;      /* 主要文字颜色 */
+            --light-text: #ffffff;      /* 浅色文字 */
+            --border-color: #cccccc;    /* 边框颜色 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* 布局 */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏 */
+        .header {
+            background: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            background: var(--light-blue);
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-title h1 {
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-bottom: 10px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+        }
+
+        /* 项目列表样式 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .project-info p {
+            margin-bottom: 10px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .project-info .area {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .project-info .type {
+            display: inline-block;
+            background: var(--light-blue);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 搜索栏样式 */
+        .search-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .search-group label {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .search-group select {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 150px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .search-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .search-button {
+            background: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .search-button:hover {
+            background: var(--hover-blue);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <img src="images/logo.png" alt="上海嘉丰物业管理有限公司">
+                    <span class="nav-logo-text">上海嘉丰物业管理有限公司</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="services.html">服务产品</a></li>
+                    <li><a href="projects.html" class="active">在管项目</a></li>
+                    <li><a href="news.html">新闻动态</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-title">
+        <div class="container">
+            <h1>在管项目</h1>
+            <p>展示我们优质的物业管理服务项目</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- 添加搜索栏 -->
+        <div class="search-section">
+            <form class="search-form" id="projectSearch">
+                <div class="search-group">
+                    <label for="province">省/直辖市</label>
+                    <select id="province" name="province">
+                        <option value="">全部</option>
+                        <option value="shanghai" selected>上海市</option>
+                        <option value="beijing">北京市</option>
+                        <option value="tianjin">天津市</option>
+                        <option value="chongqing">重庆市</option>
+                        <option value="jiangsu">江苏省</option>
+                        <option value="zhejiang">浙江省</option>
+                        <option value="anhui">安徽省</option>
+                        <option value="fujian">福建省</option>
+                        <option value="guangdong">广东省</option>
+                        <option value="shandong">山东省</option>
+                        <option value="hebei">河北省</option>
+                        <option value="henan">河南省</option>
+                        <option value="hubei">湖北省</option>
+                        <option value="hunan">湖南省</option>
+                        <option value="sichuan">四川省</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="city">城市</label>
+                    <select id="city" name="city">
+                        <option value="">全部</option>
+                        <option value="shanghai" selected>上海市</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="district">区县</label>
+                    <select id="district" name="district">
+                        <option value="">全部</option>
+                        <option value="minhang" selected>闵行区</option>
+                        <option value="xuhui">徐汇区</option>
+                        <option value="pudong">浦东新区</option>
+                        <option value="changning">长宁区</option>
+                        <option value="putuo">普陀区</option>
+                        <option value="hongkou">虹口区</option>
+                        <option value="yangpu">杨浦区</option>
+                        <option value="baoshan">宝山区</option>
+                        <option value="jiading">嘉定区</option>
+                        <option value="songjiang">松江区</option>
+                        <option value="qingpu">青浦区</option>
+                        <option value="fengxian">奉贤区</option>
+                        <option value="jinshan">金山区</option>
+                        <option value="chongming">崇明区</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-button">搜索项目</button>
+            </form>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+            <!-- 项目列表将通过JavaScript动态加载 -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <p>电话：021-XXXXXXXX</p>
+                    <p>邮箱：service@jiafeng.com</p>
+                    <p>地址：上海市闵行区七莘路3599弄4号509室</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 上海嘉丰物业管理有限公司 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 省市联动数据
+        const cityData = {
+            shanghai: {
+                name: '上海市',
+                districts: [
+                    {value: 'minhang', name: '闵行区'},
+                    {value: 'xuhui', name: '徐汇区'},
+                    {value: 'pudong', name: '浦东新区'},
+                    {value: 'changning', name: '长宁区'},
+                    {value: 'putuo', name: '普陀区'},
+                    {value: 'hongkou', name: '虹口区'},
+                    {value: 'yangpu', name: '杨浦区'},
+                    {value: 'baoshan', name: '宝山区'},
+                    {value: 'jiading', name: '嘉定区'},
+                    {value: 'songjiang', name: '松江区'},
+                    {value: 'qingpu', name: '青浦区'},
+                    {value: 'fengxian', name: '奉贤区'},
+                    {value: 'jinshan', name: '金山区'},
+                    {value: 'chongming', name: '崇明区'}
+                ]
+            },
+            jiangsu: {
+                name: '江苏省',
+                cities: [
+                    {value: 'nanjing', name: '南京市'},
+                    {value: 'suzhou', name: '苏州市'},
+                    {value: 'wuxi', name: '无锡市'},
+                    {value: 'changzhou', name: '常州市'},
+                    {value: 'nantong', name: '南通市'},
+                    {value: 'yangzhou', name: '扬州市'},
+                    {value: 'zhenjiang', name: '镇江市'},
+                    {value: 'xuzhou', name: '徐州市'},
+                    {value: 'taizhou', name: '泰州市'},
+                    {value: 'yancheng', name: '盐城市'},
+                    {value: 'huaian', name: '淮安市'},
+                    {value: 'suqian', name: '宿迁市'},
+                    {value: 'lianyungang', name: '连云港市'}
+                ]
+            },
+            zhejiang: {
+                name: '浙江省',
+                cities: [
+                    {value: 'hangzhou', name: '杭州市'},
+                    {value: 'ningbo', name: '宁波市'},
+                    {value: 'wenzhou', name: '温州市'},
+                    {value: 'shaoxing', name: '绍兴市'},
+                    {value: 'huzhou', name: '湖州市'},
+                    {value: 'jiaxing', name: '嘉兴市'},
+                    {value: 'jinhua', name: '金华市'},
+                    {value: 'taizhou', name: '台州市'},
+                    {value: 'lishui', name: '丽水市'},
+                    {value: 'quzhou', name: '衢州市'},
+                    {value: 'zhoushan', name: '舟山市'}
+                ]
+            }
+        };
+
+        // 从localStorage获取项目数据，如果没有则使用默认数据
+        const projects = JSON.parse(localStorage.getItem('projects')) || [
+            {
+                id: 1,
+                name: '莘松苑',
+                address: '上海市闵行区莘松路958弄',
+                area: 80000,
+                type: '住宅'
+            },
+            {
+                id: 2,
+                name: '虹莘花苑',
+                address: '上海市闵行区虹莘路3999弄',
+                area: 120000,
+                type: '住宅'
+            },
+            {
+                id: 3,
+                name: '七莘商务中心',
+                address: '上海市闵行区七莘路3599弄',
+                area: 50000,
+                type: '商业办公'
+            },
+            {
+                id: 4,
+                name: '华商时代广场',
+                address: '上海市闵行区虹井路288号',
+                area: 45000,
+                type: '商业综合体'
+            }
+        ];
+
+        // 渲染项目列表
+        function renderProjects(filteredProjects = projects) {
+            const projectsGrid = document.getElementById('projectsGrid');
+            projectsGrid.innerHTML = '';
+
+            filteredProjects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.innerHTML = `
+                    <div class="project-info">
+                        <h3>${project.name}</h3>
+                        <p><strong>地址：</strong>${project.address}</p>
+                        <p class="area"><strong>建筑面积：</strong>${project.area.toLocaleString()}㎡</p>
+                        <p class="type">${project.type}</p>
+                    </div>
+                `;
+                projectsGrid.appendChild(projectCard);
+            });
+        }
+
+        // 项目搜索功能
+        document.getElementById('projectSearch').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const province = document.getElementById('province').value;
+            const city = document.getElementById('city').value;
+            const district = document.getElementById('district').value;
+            
+            // 过滤项目
+            const filteredProjects = projects.filter(project => {
+                const address = project.address;
+                
+                // 如果没有选择任何条件，显示所有项目
+                if (!province && !city && !district) {
+                    return true;
+                }
+
+                // 处理上海市的特殊情况
+                if (province === 'shanghai') {
+                    // 检查地址是否包含"上海市"
+                    if (!address.includes('上海市')) {
+                        return false;
+                    }
+
+                    // 如果选择了区县，检查地址是否包含该区县
+                    if (district) {
+                        const districtName = document.querySelector(`#district option[value="${district}"]`).text;
+                        return address.includes(districtName);
+                    }
+
+                    return true;
+                }
+
+                // 处理其他省份
+                if (province) {
+                    const provinceName = document.querySelector(`#province option[value="${province}"]`).text;
+                    if (!address.includes(provinceName)) {
+                        return false;
+                    }
+
+                    // 如果选择了城市，检查地址是否包含该城市
+                    if (city) {
+                        const cityName = document.querySelector(`#city option[value="${city}"]`).text;
+                        return address.includes(cityName);
+                    }
+
+                    return true;
+                }
+
+                return true;
+            });
+
+            // 直接渲染过滤后的项目列表
+            renderProjects(filteredProjects);
+
+            // 平滑滚动到项目列表
+            document.querySelector('.projects-grid').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // 省市联动
+        document.getElementById('province').addEventListener('change', function() {
+            const province = this.value;
+            const citySelect = document.getElementById('city');
+            const districtSelect = document.getElementById('district');
+            
+            // 重置城市选择
+            citySelect.innerHTML = '<option value="">全部</option>';
+            districtSelect.innerHTML = '<option value="">全部</option>';
+            
+            if (province && cityData[province]) {
+                if (province === 'shanghai') {
+                    citySelect.innerHTML = `
+                        <option value="">全部</option>
+                        <option value="shanghai" selected>上海市</option>
+                    `;
+                    // 更新区县选项
+                    cityData[province].districts.forEach(district => {
+                        districtSelect.innerHTML += `
+                            <option value="${district.value}">${district.name}</option>
+                        `;
+                    });
+                } else {
+                    // 更新城市选项
+                    cityData[province].cities.forEach(city => {
+                        citySelect.innerHTML += `
+                            <option value="${city.value}">${city.name}</option>
+                        `;
+                    });
+                }
+            }
+        });
+
+        // 城市变化时更新区县
+        document.getElementById('city').addEventListener('change', function() {
+            const city = this.value;
+            const districtSelect = document.getElementById('district');
+            
+            // 重置区县选择
+            districtSelect.innerHTML = '<option value="">全部</option>';
+            
+            // 如果选择的是上海市，显示上海的区县
+            if (city === 'shanghai') {
+                cityData.shanghai.districts.forEach(district => {
+                    districtSelect.innerHTML += `
+                        <option value="${district.value}">${district.name}</option>
+                    `;
+                });
+            }
+        });
+
+        // 初始化显示项目列表
+        renderProjects();
+
+        // 添加自动刷新功能
+        setInterval(() => {
+            const newData = JSON.parse(localStorage.getItem('projects'));
+            if (newData && JSON.stringify(newData) !== JSON.stringify(projects)) {
+                location.reload();
+            }
+        }, 1000); // 每秒检查一次数据更新
+    </script>
+</body>
+</html> 

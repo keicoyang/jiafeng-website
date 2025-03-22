@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;    /* 深蓝色主色调 */
+            --secondary-color: #cc0000;  /* 红色强调色 */
+            --accent-color: #990000;     /* 深红色点缀 */
+            --light-blue: #e6f0ff;      /* 浅蓝色背景 */
+            --hover-blue: #004d99;      /* 悬停时的深蓝色 */
+            --text-color: #333333;      /* 主要文字颜色 */
+            --light-text: #ffffff;      /* 浅色文字 */
+            --border-color: #cccccc;    /* 边框颜色 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: #f5f5f5;
+        }
+
+        /* 布局 */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏 */
+        .header {
+            background: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            text-align: center;
+            margin: 40px 0;
+            color: var(--primary-color);
+            font-size: 32px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        /* 公司简介 */
+        .company-intro {
+            background: white;
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 60px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            border-top: 3px solid var(--secondary-color);
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        .company-intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 26px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .company-intro h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 25px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+
+        .company-intro p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .company-intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .company-intro p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        /* 荣誉展示 */
+        .honors-section {
+            margin-top: 40px;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+
+        .honors-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 35px;
+            text-align: center;
+            font-size: 26px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .honors-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .honors-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .honor-item {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .honor-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -5px;
+            width: 5px;
+            height: 100%;
+            background: var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .honor-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .honor-item:hover::before {
+            transform: scaleY(1.1);
+        }
+
+        .honor-title {
+            color: var(--primary-color);
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .honor-item:hover .honor-title {
+            color: var(--secondary-color);
+        }
+
+        .honor-date {
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--light-blue);
+            border-radius: 4px;
+        }
+
+        .honor-description {
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 16px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .honor-description::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 40px 0;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .footer-content {
+            width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* 无内容提示样式 */
+        .no-content {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px dashed var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <img src="images/logo.png" alt="上海嘉丰物业管理有限公司">
+                    <span class="nav-logo-text">上海嘉丰物业管理有限公司</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html" class="active">关于我们</a></li>
+                    <li><a href="services.html">服务产品</a></li>
+                    <li><a href="projects.html">在管项目</a></li>
+                    <li><a href="news.html">新闻动态</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">关于我们</h1>
+        
+        <div class="company-intro">
+            <h2>公司简介</h2>
+            <p>上海嘉丰物业管理有限公司成立于2000年，是一家专业从事物业管理的综合性服务企业。公司秉承"专业服务，品质生活"的服务理念，致力于为客户提供优质、专业的物业管理服务。</p>
+            <p>经过多年的发展，公司已在上海地区积累了丰富的物业管理经验，服务项目涵盖住宅、商业、办公等多个领域。我们拥有一支专业的管理团队和训练有素的服务人员，通过标准化的管理和人性化的服务，不断提升服务品质，赢得了广大业主的信赖与好评。</p>
+            <p>公司始终坚持"以人为本，服务至上"的经营理念，通过不断创新服务模式，引入智能化管理系统，努力为业主创造安全、舒适、温馨的生活环境。</p>
+        </div>
+
+        <div class="honors-section">
+            <h2>公司荣誉</h2>
+            <div class="honors-list" id="honorsList">
+                <!-- 荣誉列表将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2024 上海嘉丰物业管理有限公司 版权所有</p>
+        </div>
+    </footer>
+
+    <script>
+        // 从localStorage获取荣誉数据
+        const honors = JSON.parse(localStorage.getItem('honors')) || [];
+
+        // 显示荣誉列表
+        function renderHonors() {
+            const honorsList = document.getElementById('honorsList');
+            honorsList.innerHTML = '';
+
+            // 按日期降序排序荣誉
+            const sortedHonors = honors.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            if (sortedHonors.length === 0) {
+                honorsList.innerHTML = '<div class="no-content">暂无荣誉记录</div>';
+                return;
+            }
+
+            sortedHonors.forEach(item => {
+                const honorItem = document.createElement('div');
+                honorItem.className = 'honor-item';
+                
+                // 格式化日期
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleDateString('zh-CN', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                honorItem.innerHTML = `
+                    <h3 class="honor-title">${item.title}</h3>
+                    <div class="honor-date">${formattedDate}</div>
+                    <div class="honor-description">${item.description}</div>
+                `;
+                honorsList.appendChild(honorItem);
+            });
+        }
+
+        // 初始化显示荣誉列表
+        renderHonors();
+    </script>
+</body>
+</html>

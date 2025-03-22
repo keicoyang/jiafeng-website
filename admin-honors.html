@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>荣誉管理 - 上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #cc0000;
+            --accent-color: #990000;
+            --light-blue: #e6f0ff;
+            --hover-blue: #004d99;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --border-color: #cccccc;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-blue);
+        }
+
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 后台管理样式 */
+        .admin-header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .admin-nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .admin-nav a:hover {
+            background: var(--hover-blue);
+        }
+
+        /* 荣誉列表表格 */
+        .honors-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .honors-table th,
+        .honors-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .honors-table th {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .honors-table tr:hover {
+            background: var(--light-blue);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-add {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-edit {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-delete {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* 表单样式 */
+        .honor-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* 提示消息样式 */
+        .message {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 检查登录状态
+        if (!localStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'admin-login.html';
+        }
+
+        // 退出登录函数
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'admin-login.html';
+        }
+    </script>
+
+    <div class="container">
+        <header class="admin-header">
+            <h1 class="admin-title">荣誉管理</h1>
+            <nav class="admin-nav">
+                <a href="admin-projects.html">项目管理</a>
+                <a href="admin-news.html">新闻管理</a>
+                <a href="admin-honors.html" class="active">荣誉管理</a>
+                <a href="about.html" target="_blank">查看前台页面</a>
+                <a href="#" onclick="logout()">退出登录</a>
+            </nav>
+        </header>
+
+        <div id="message" class="message"></div>
+
+        <button class="btn btn-add" onclick="showAddForm()">添加荣誉</button>
+
+        <div id="honorForm" class="honor-form">
+            <h2 id="formTitle">添加荣誉</h2>
+            <form id="addHonorForm" onsubmit="handleSubmit(event)">
+                <input type="hidden" id="honorId">
+                <div class="form-group">
+                    <label for="honorTitle">荣誉名称</label>
+                    <input type="text" id="honorTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="honorDate">获得日期</label>
+                    <input type="date" id="honorDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="honorDescription">荣誉描述</label>
+                    <textarea id="honorDescription" required></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-delete" onclick="hideForm()">取消</button>
+                    <button type="submit" class="btn btn-add">保存</button>
+                </div>
+            </form>
+        </div>
+
+        <table class="honors-table">
+            <thead>
+                <tr>
+                    <th>荣誉名称</th>
+                    <th>获得日期</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="honorsList">
+                <!-- 荣誉列表将通过JavaScript动态加载 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 从localStorage获取荣誉数据，如果没有则使用默认数据
+        let honors = JSON.parse(localStorage.getItem('honors')) || [
+            {
+                id: 1,
+                title: '2023年度优秀物业服务企业',
+                date: '2023-12-25',
+                description: '在2023年度物业服务企业评选中，上海嘉丰物业管理有限公司凭借优质的服务和良好的口碑，荣获"优秀物业服务企业"称号。'
+            }
+        ];
+
+        // 显示荣誉列表
+        function renderHonors() {
+            const honorsList = document.getElementById('honorsList');
+            honorsList.innerHTML = '';
+            
+            honors.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.title}</td>
+                    <td>${item.date}</td>
+                    <td>
+                        <button class="btn btn-edit" onclick="editHonor(${item.id})">编辑</button>
+                        <button class="btn btn-delete" onclick="deleteHonor(${item.id})">删除</button>
+                    </td>
+                `;
+                honorsList.appendChild(tr);
+            });
+        }
+
+        // 显示添加表单
+        function showAddForm() {
+            document.getElementById('formTitle').textContent = '添加荣誉';
+            document.getElementById('honorForm').style.display = 'block';
+            document.getElementById('honorId').value = '';
+            document.getElementById('addHonorForm').reset();
+        }
+
+        // 隐藏表单
+        function hideForm() {
+            document.getElementById('honorForm').style.display = 'none';
+        }
+
+        // 编辑荣誉
+        function editHonor(id) {
+            const honorItem = honors.find(item => item.id === id);
+            if (honorItem) {
+                document.getElementById('formTitle').textContent = '编辑荣誉';
+                document.getElementById('honorId').value = id;
+                document.getElementById('honorTitle').value = honorItem.title;
+                document.getElementById('honorDate').value = honorItem.date;
+                document.getElementById('honorDescription').value = honorItem.description;
+                document.getElementById('honorForm').style.display = 'block';
+            }
+        }
+
+        // 删除荣誉
+        function deleteHonor(id) {
+            if (confirm('确定要删除这个荣誉吗？')) {
+                honors = honors.filter(item => item.id !== id);
+                localStorage.setItem('honors', JSON.stringify(honors));
+                showMessage('荣誉已删除', 'success');
+                renderHonors();
+            }
+        }
+
+        // 处理表单提交
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('honorId').value;
+            const title = document.getElementById('honorTitle').value;
+            const date = document.getElementById('honorDate').value;
+            const description = document.getElementById('honorDescription').value;
+            
+            if (id) {
+                // 编辑现有荣誉
+                const index = honors.findIndex(item => item.id === parseInt(id));
+                if (index !== -1) {
+                    honors[index] = { id: parseInt(id), title, date, description };
+                }
+            } else {
+                // 添加新荣誉
+                const newId = honors.length > 0 ? Math.max(...honors.map(item => item.id)) + 1 : 1;
+                honors.push({ id: newId, title, date, description });
+            }
+            
+            localStorage.setItem('honors', JSON.stringify(honors));
+            showMessage(id ? '荣誉已更新' : '荣誉已添加', 'success');
+            hideForm();
+            renderHonors();
+        }
+
+        // 显示提示消息
+        function showMessage(text, type) {
+            const message = document.getElementById('message');
+            message.textContent = text;
+            message.className = `message message-${type}`;
+            message.style.display = 'block';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
+        }
+
+        // 初始化显示荣誉列表
+        renderHonors();
+    </script>
+</body>
+</html> 

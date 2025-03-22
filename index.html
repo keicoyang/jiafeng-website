@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上海嘉丰物业管理有限公司</title>
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #003366;    /* 深蓝色主色调 */
+            --secondary-color: #cc0000;  /* 红色强调色 */
+            --accent-color: #990000;     /* 深红色点缀 */
+            --light-blue: #e6f0ff;      /* 浅蓝色背景 */
+            --hover-blue: #004d99;      /* 悬停时的深蓝色 */
+            --text-color: #333333;      /* 主要文字颜色 */
+            --light-text: #ffffff;      /* 浅色文字 */
+            --border-color: #cccccc;    /* 边框颜色 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* 布局 */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏 */
+        .header {
+            background: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        /* 横幅 */
+        .banner {
+            background: var(--light-blue);
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .banner-text {
+            width: 50%;
+        }
+
+        .banner-text h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+        }
+
+        .banner-text p {
+            color: var(--text-color);
+            margin-bottom: 30px;
+        }
+
+        .banner-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .banner-button:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(153, 0, 0, 0.2);
+        }
+
+        /* 服务部分 */
+        .services {
+            padding: 60px 0;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-item {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .service-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(153, 0, 0, 0.1);
+        }
+
+        .service-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        /* 关于我们 */
+        .about {
+            padding: 60px 0;
+            background: var(--light-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .advantage-item {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(153, 0, 0, 0.1);
+        }
+
+        .advantage-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .advantage-item p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <img src="images/logo.png" alt="上海嘉丰物业管理有限公司">
+                    <span class="nav-logo-text">上海嘉丰物业管理有限公司</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="services.html">服务产品</a></li>
+                    <li><a href="projects.html">在管项目</a></li>
+                    <li><a href="news.html">新闻动态</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h1>专业的物业管理服务提供商</h1>
+                    <p>成立于1998年，拥有ISO9001质量管理体系认证，专注于为客户提供优质物业服务</p>
+                    <a href="contact.html" class="banner-button">联系我们</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>服务项目</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>住宅物业</h3>
+                    <p>提供专业的住宅物业管理服务，包括安保、保洁、绿化等全方位服务。</p>
+                </div>
+                <div class="service-item">
+                    <h3>商业物业</h3>
+                    <p>为写字楼、商铺等商业物业提供专业的物业管理和运营服务。</p>
+                </div>
+                <div class="service-item">
+                    <h3>前期服务</h3>
+                    <p>提供物业前期介入服务和顾问管理，确保项目平稳交付和运营。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <h2>企业优势</h2>
+            <div class="advantage-grid">
+                <div class="advantage-item">
+                    <h3>专业资质</h3>
+                    <p>国家三级资质物业服务企业，ISO9001质量管理体系认证</p>
+                </div>
+                <div class="advantage-item">
+                    <h3>服务理念</h3>
+                    <p>以"厚德载物"为服务理念，实施"三变"管理服务模式</p>
+                </div>
+                <div class="advantage-item">
+                    <h3>管理规模</h3>
+                    <p>管理面积超50万平方米，服务类型多样化</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <p>电话：021-XXXXXXXX</p>
+                    <p>邮箱：service@jiafeng.com</p>
+                    <p>地址：上海市闵行区七莘路3599弄4号509室</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 上海嘉丰物业管理有限公司 版权所有 | <a href="admin-projects.html" target="_blank" style="color: #999; text-decoration: none; font-size: 14px;">管理</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
