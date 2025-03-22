@@ -169,109 +169,59 @@
 
         /* 荣誉展示 */
         .honors-section {
-            margin-top: 40px;
-            max-width: 900px;
-            margin: 40px auto 0;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .honors-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 35px;
+            color: #333;
+            margin-bottom: 30px;
             text-align: center;
-            font-size: 26px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .honors-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--secondary-color);
+            font-size: 24px;
         }
 
         .honors-list {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
         }
 
         .honor-item {
-            background: white;
+            padding: 20px;
+            background-color: #f8f9fa;
             border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--secondary-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .honor-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -5px;
-            width: 5px;
-            height: 100%;
-            background: var(--secondary-color);
             transition: transform 0.3s ease;
         }
 
         .honor-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .honor-item:hover::before {
-            transform: scaleY(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .honor-title {
-            color: var(--primary-color);
-            font-size: 22px;
-            margin-bottom: 12px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .honor-item:hover .honor-title {
-            color: var(--secondary-color);
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
         .honor-date {
-            color: var(--secondary-color);
+            color: #666;
             font-size: 14px;
-            margin-bottom: 15px;
-            display: inline-block;
-            padding: 4px 12px;
-            background: var(--light-blue);
-            border-radius: 4px;
+            margin-bottom: 10px;
         }
 
         .honor-description {
-            color: var(--text-color);
-            line-height: 1.8;
-            font-size: 16px;
-            position: relative;
-            padding-left: 15px;
+            color: #555;
+            line-height: 1.6;
         }
 
-        .honor-description::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--border-color);
-            border-radius: 3px;
+        .no-content {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-style: italic;
         }
 
         /* 页脚样式 */
@@ -297,17 +247,6 @@
             width: 1200px;
             margin: 0 auto;
             text-align: center;
-        }
-
-        /* 无内容提示样式 */
-        .no-content {
-            text-align: center;
-            color: #666;
-            padding: 40px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 1px dashed var(--border-color);
         }
     </style>
 </head>
@@ -356,8 +295,30 @@
     </footer>
 
     <script>
-        // 从localStorage获取荣誉数据
-        const honors = JSON.parse(localStorage.getItem('honors')) || [];
+        // 默认荣誉数据
+        const defaultHonors = [
+            {
+                title: "上海市物业服务企业综合服务能力等级评定AAA级",
+                date: "2023-12-15",
+                description: "经上海市物业管理行业协会评定，我司荣获AAA级物业服务企业称号，这是对我们服务质量的最高肯定。"
+            },
+            {
+                title: "2023年度上海市优秀物业服务企业",
+                date: "2023-11-20",
+                description: "凭借优质的服务和创新的管理模式，公司获得上海市住房和城乡建设管理委员会颁发的优秀物业服务企业称号。"
+            },
+            {
+                title: "2023年度客户满意度五星级企业",
+                date: "2023-10-01",
+                description: "在年度客户满意度调查中，我司以98.5%的满意率获得五星级评价，展现了我们对服务品质的不懈追求。"
+            }
+        ];
+
+        // 从localStorage获取荣誉数据，如果没有则使用默认数据
+        const honors = JSON.parse(localStorage.getItem('honors')) || defaultHonors;
+        if (!localStorage.getItem('honors')) {
+            localStorage.setItem('honors', JSON.stringify(defaultHonors));
+        }
 
         // 显示荣誉列表
         function renderHonors() {
