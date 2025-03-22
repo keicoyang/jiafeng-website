@@ -1,0 +1,187 @@
+/* 基础响应式设置 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* 导航菜单响应式 */
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* 媒体查询 - 手机设备 */
+@media (max-width: 767px) {
+  .main-header .nav ul {
+    display: none;
+  }
+  
+  .mobile-menu-icon {
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+  }
+  
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
+  }
+  
+  .mobile-menu.show {
+    display: block;
+  }
+  
+  .mobile-menu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .logo img {
+    max-width: 200px;
+  }
+  
+  .banner-content {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .banner h1 {
+    font-size: 24px;
+  }
+  
+  .banner p {
+    font-size: 14px;
+  }
+  
+  .services-grid, .projects-grid, .news-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-content, .contact-content {
+    flex-direction: column;
+  }
+  
+  .about-image, .about-text,
+  .contact-form, .contact-info {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  .footer {
+    text-align: center;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+  }
+  
+  .footer-logo, .footer-links, .footer-contact {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* 表格响应式处理 */
+  table, thead, tbody, th, td, tr { 
+    display: block; 
+  }
+  
+  thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr { 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px;
+  }
+  
+  td { 
+    border: none;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    padding-left: 50%; 
+  }
+  
+  td:before { 
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%; 
+    padding-right: 10px; 
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+  }
+  
+  /* 管理页面响应式 */
+  .admin-container {
+    padding: 10px;
+  }
+  
+  .admin-form input, 
+  .admin-form textarea, 
+  .admin-form select {
+    width: 100%;
+  }
+}
+
+/* 媒体查询 - 平板设备 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .services-grid, .projects-grid, .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .about-image, .about-text {
+    width: 50%;
+  }
+  
+  .contact-form, .contact-info {
+    width: 50%;
+  }
+}
+
+/* 媒体查询 - 桌面设备 */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 30px;
+  }
+} 
