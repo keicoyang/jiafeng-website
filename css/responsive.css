@@ -7,6 +7,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Microsoft YaHei", sans-serif;
+  overflow-x: hidden;
 }
 
 img {
@@ -161,6 +162,85 @@ img {
   .admin-form textarea, 
   .admin-form select {
     width: 100%;
+  }
+  
+  /* 调整字体大小 */
+  body {
+    font-size: 16px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* 减少内边距 */
+  .section {
+    padding: 20px 10px;
+  }
+  
+  /* 确保图片响应式 */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* 修复导航栏 */
+  .main-header {
+    position: relative;
+    padding: 10px;
+  }
+  
+  .logo {
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* 按钮和表单修复 */
+  button, .btn, input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+  }
+  
+  /* 表格调整 */
+  table {
+    font-size: 14px;
+  }
+  
+  /* 页脚调整 */
+  .footer {
+    padding: 20px 10px;
+    text-align: center;
+  }
+  
+  .footer .container > div {
+    margin-bottom: 15px;
+  }
+  
+  /* 联系页面特定修复 */
+  .contact-form {
+    padding: 15px;
+  }
+  
+  .map-container {
+    height: 250px;
+  }
+  
+  /* 项目页面特定修复 */
+  .project-card {
+    margin-bottom: 20px;
   }
 }
 
