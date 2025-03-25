@@ -567,56 +567,48 @@ img, video, iframe, embed, object {
 }
 
 /* 移动设备样式 */
-@media screen and (max-width: 767px) {
-    /* 首页解决方案网格布局 */
-    .services-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+@media (max-width: 767px) {
+    /* 基础布局调整 */
+    .container {
+        width: 100% !important;
+        padding: 0 15px !important;
     }
 
-    /* 首页企业优势网格布局 */
-    .advantage-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+    /* 导航栏样式 */
+    .header {
+        padding: 10px 0 !important;
     }
 
-    .advantage-item {
-        margin-bottom: 20px !important;
+    .nav {
+        padding: 0 40px 0 10px !important;
+        position: relative !important;
     }
 
-    /* 首页服务项目网格布局 */
-    .service-list {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+    .nav-logo {
+        max-width: 90% !important;
+        padding-right: 40px !important;
     }
 
-    /* 首页项目卡片网格布局 */
-    .projects-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+    .nav-logo img {
+        max-height: 32px !important;
+        width: auto !important;
     }
 
-    /* 首页新闻卡片网格布局 */
-    .news-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+    .nav-logo-text {
+        display: block !important;
+        font-size: 14px !important;
+        margin-left: 8px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 180px !important;
     }
 
-    /* 首页资质证书网格布局 */
-    .qualification-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+    /* 横幅样式 */
+    .banner {
+        padding: 40px 0 !important;
     }
 
-    /* 首页其他网格布局 */
-    .grid-2,
-    .grid-3,
-    .grid-4 {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-    }
-
-    /* 首页横幅布局调整 */
     .banner-content {
         flex-direction: column !important;
         text-align: center !important;
@@ -627,18 +619,38 @@ img, video, iframe, embed, object {
         margin-bottom: 30px !important;
     }
 
-    /* 首页服务项目样式调整 */
+    /* 解决方案网格布局 */
+    .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
     .service-item {
         margin-bottom: 20px !important;
     }
 
-    /* 首页关于我们部分调整 */
-    .about-content {
-        flex-direction: column !important;
+    /* 企业优势网格布局 */
+    .advantage-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
     }
 
-    .about-text,
-    .about-image {
-        width: 100% !important;
+    .advantage-item {
+        margin-bottom: 20px !important;
+    }
+
+    /* 其他网格布局 */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 移动菜单按钮 */
+    .mobile-menu-icon {
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
     }
 }
