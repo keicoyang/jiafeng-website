@@ -26,25 +26,73 @@
     overflow-x: hidden;
   }
   
-  /* 移动菜单基础样式 */
-  .mobile-menu-icon {
-    display: none;
+  /* 基础导航栏样式，适用于所有设备 */
+  .header {
+    background: #003366;
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
   
-  .mobile-menu {
-    display: none;
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
   }
   
   /* 桌面导航菜单 */
-  .nav ul {
+  .nav-menu {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap;
   }
   
-  .nav ul li {
+  .nav-menu li {
     margin-right: 20px;
+  }
+  
+  .nav-menu li:last-child {
+    margin-right: 0;
+  }
+  
+  .nav-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 0;
+    display: block;
+  }
+  
+  .nav-menu a:hover {
+    color: #e6f0ff;
+  }
+  
+  .nav-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-logo img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+  }
+  
+  .nav-logo-text {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  
+  /* 移动菜单默认隐藏 */
+  .mobile-menu-icon,
+  .mobile-menu {
+    display: none;
   }
   
   /* ===== 手机设备样式 ===== */
@@ -54,6 +102,7 @@
       overflow-x: hidden !important;
       width: 100% !important;
       max-width: 100vw !important;
+      position: relative !important;
     }
     
     /* 所有容器限制宽度 */
@@ -66,69 +115,23 @@
       max-width: 100% !important;
       padding-left: 15px !important;
       padding-right: 15px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
     }
     
-    /* ===== 2. 导航菜单修复 ===== */
-    /* 隐藏桌面导航 */
-    .nav ul, 
-    header ul,
-    .nav-menu,
-    .main-nav,
-    nav > ul {
-      display: none !important;
-    }
-    
-    /* ===== 3. 仅显示Logo，隐藏公司名称 ===== */
-    /* 隐藏公司名称文本 */
-    .company-name span,
-    .site-title span,
-    .company-name h1,
-    .site-title h1,
-    header h1 span,
-    .logo h1,
-    header h1,
-    .site-description,
-    .header-text {
-      display: none !important;
-    }
-    
-    /* 只保留和优化Logo */
-    .logo,
-    .company-logo,
-    .site-logo {
-      display: block !important;
-      margin: 10px auto !important;
-      text-align: center !important;
-      max-width: 200px !important;
-      padding: 0 !important;
-    }
-    
-    .logo img,
-    .company-logo img,
-    .site-logo img {
-      display: block !important;
-      margin: 0 auto !important;
-      max-height: 50px !important;
-      width: auto !important;
-    }
-    
-    /* 调整头部区域 */
+    /* ===== 2. 导航修复 - 仅在移动设备生效 ===== */
+    .header, 
     header,
-    .header,
-    .main-header {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
+    .main-header,
+    div[class*="header"] {
+      width: 100% !important;
       height: auto !important;
       min-height: 70px !important;
       padding: 10px !important;
       position: relative !important;
     }
     
-    /* 显示移动菜单图标 */
+    /* 显示移动菜单图标 - 仅在移动设备生效 */
     .mobile-menu-icon {
       display: block !important;
       position: fixed !important;
@@ -156,6 +159,8 @@
       z-index: 9998 !important;
       background-color: #003366 !important;
       box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+      max-height: calc(100vh - 70px) !important;
+      overflow-y: auto !important;
     }
     
     .mobile-menu a {
@@ -173,146 +178,171 @@
       background-color: #004d99 !important;
     }
     
-    /* ===== 4. 搜索栏修复 ===== */
-    /* 所有可能的搜索表单类名 */
-    form,
-    form[role="search"],
-    .search-form,
-    .search-container,
-    .search-box,
-    .search-wrapper,
-    .projects-search,
-    .projects-filter,
-    div[class*="search"] {
-      width: 100% !important;
-      max-width: 100% !important;
+    /* 隐藏桌面导航 */
+    .nav-menu,
+    nav > ul,
+    .nav ul,
+    header ul:not(.mobile-menu) {
+      display: none !important;
+    }
+    
+    /* 只显示LOGO和图标 */
+    .nav, nav, .navigation {
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 10px 50px 10px 10px !important;
+    }
+    
+    .nav-logo, .logo {
+      display: flex !important;
+      align-items: center !important;
+      max-width: 80% !important;
+    }
+    
+    .nav-logo img {
+      max-height: 40px !important;
+      width: auto !important;
+    }
+    
+    /* 修改导航栏logo文字显示 */
+    .nav-logo-text {
+        display: block !important;
+        font-size: 14px !important;
+        margin-left: 8px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 180px !important;
+    }
+    
+    /* 调整logo容器宽度 */
+    .nav-logo {
+        max-width: 90% !important;
+        padding-right: 40px !important;
+    }
+    
+    /* 调整logo图片大小 */
+    .nav-logo img {
+        max-height: 32px !important;
+        width: auto !important;
+    }
+    
+    /* 调整导航栏整体布局 */
+    .nav {
+        padding: 5px 40px 5px 10px !important;
+    }
+    
+    /* 调整菜单按钮位置 */
+    .mobile-menu-icon {
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+    }
+    
+    /* ===== 3. 搜索表单布局修复 ===== */
+    .search-section {
       padding: 10px 0 !important;
-      margin: 0 !important;
+      width: 100% !important;
       overflow: hidden !important;
     }
     
-    /* 输入框样式 */
-    input[type="text"],
-    input[type="search"],
-    input[type="email"],
-    input[type="tel"],
-    select,
-    textarea {
+    .search-form {
+      flex-direction: column !important;
+      gap: 10px !important;
       width: 100% !important;
-      padding: 12px !important;
-      margin-bottom: 10px !important;
-      border: 1px solid #ccc !important;
-      border-radius: 4px !important;
-      font-size: 16px !important; /* 防止iOS缩放 */
     }
     
-    /* 搜索按钮 */
-    button[type="submit"],
-    input[type="submit"],
+    .search-group {
+      width: 100% !important;
+      margin-bottom: 10px !important;
+    }
+    
+    .search-group select,
+    .search-group input {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    
     .search-button {
       width: 100% !important;
-      padding: 12px !important;
-      background-color: #003366 !important;
-      color: white !important;
-      border: none !important;
-      border-radius: 4px !important;
-      cursor: pointer !important;
-      font-size: 16px !important;
+      margin-top: 5px !important;
     }
     
-    /* ===== 5. 内容布局修复 ===== */
-    /* 去除浮动，强制单列布局 */
-    .row,
-    .col,
-    [class*="col-"],
-    .service-item,
-    .project-item,
-    .news-item,
-    .advantage-item,
-    .qualification-item,
-    div[class*="item"],
-    div[class*="card"] {
-      width: 100% !important;
-      float: none !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      margin-bottom: 20px !important;
+    /* ===== 4. 联系页面布局修复 ===== */
+    .contact-content {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+    
+    /* ===== 5. 资质证书样式优化 ===== */
+    .qualifications-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+    
+    .qualification-item {
       padding: 15px !important;
     }
     
-    /* 多列布局改为单列 */
-    .services-grid,
-    .projects-grid,
-    .news-grid,
-    .qualifications-grid,
-    div[class*="grid"],
-    .flex-container,
-    div[class*="flex"] {
-      display: block !important;
-      grid-template-columns: 1fr !important;
-    }
-    
-    /* ===== 6. 页脚修复 ===== */
-    footer,
-    .footer {
-      text-align: center !important;
-      padding: 20px 15px !important;
-    }
-    
-    .footer-content,
-    .footer-column,
-    .footer div[class*="col"] {
+    .qualification-image {
       width: 100% !important;
-      float: none !important;
-      margin-bottom: 20px !important;
-      text-align: center !important;
+      max-width: 200px !important;
+      height: auto !important;
+      margin-bottom: 15px !important;
     }
     
-    /* ===== 7. 表格修复 ===== */
-    table {
-      width: 100% !important;
-      border-collapse: collapse !important;
-      margin-bottom: 20px !important;
-      overflow-x: auto !important;
-      display: block !important;
+    .qualification-title {
+      font-size: 16px !important;
     }
     
-    table, thead, tbody, th, td, tr {
-      display: block !important;
-    }
-    
-    thead tr {
-      position: absolute !important;
-      top: -9999px !important;
-      left: -9999px !important;
-    }
-    
-    tr {
-      border: 1px solid #ccc !important;
-      margin-bottom: 10px !important;
-    }
-    
-    td {
-      border: none !important;
-      border-bottom: 1px solid #eee !important;
-      position: relative !important;
-      padding-left: 50% !important;
-      text-align: left !important;
-    }
-    
-    td:before {
-      position: absolute !important;
-      top: 6px !important;
-      left: 6px !important;
-      width: 45% !important;
-      white-space: nowrap !important;
-      content: attr(data-label) !important;
-      font-weight: bold !important;
+    .qualification-description {
+      font-size: 14px !important;
+      line-height: 1.5 !important;
     }
   }
   
   /* ===== 平板设备样式 ===== */
   @media (min-width: 768px) and (max-width: 1023px) {
+    .header {
+      padding: 12px 0;
+    }
+    
+    .container {
+      padding: 0 20px !important;
+    }
+    
+    /* 导航栏和LOGO样式 */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .nav-logo {
+      max-width: 60%;
+    }
+    
+    .nav-logo img {
+      height: 45px !important;
+    }
+    
+    .nav-logo-text {
+      font-size: 20px !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .nav-menu {
+      gap: 20px !important;
+      flex-wrap: nowrap;
+    }
+    
+    .nav-menu a {
+      font-size: 15px !important;
+      white-space: nowrap;
+    }
+    
+    /* 网格布局调整 */
     .services-grid,
     .projects-grid,
     .news-grid,
@@ -321,10 +351,6 @@
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 20px !important;
-    }
-    
-    .container {
-      padding: 0 20px !important;
     }
   }
   /* 针对性修复 - 添加到responsive.css最后 */
@@ -406,4 +432,213 @@
     content: none !important;
     display: none !important;
   }
+}
+
+/* ===== 4. 联系页面布局修复 ===== */
+.contact-content {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+/* 联系页面样式优化 */
+.contact-info, .contact-form {
+  padding: 15px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.contact-info p {
+  margin-bottom: 10px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.contact-info p strong {
+  margin-bottom: 5px !important;
+  display: block !important;
+}
+
+.contact-map {
+  margin-top: 15px !important;
+}
+
+.company-image {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* 表单元素优化 */
+.form-group {
+  margin-bottom: 15px !important;
+  width: 100% !important;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100% !important;
+  padding: 10px !important;
+  font-size: 16px !important;
+  box-sizing: border-box !important;
+}
+
+.submit-button {
+  width: 100% !important;
+  padding: 12px !important;
+}
+
+/* 修复可能导致页面溢出的元素 */
+img, video, iframe, embed, object {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* 特定元素的样式修复 */
+#baiduMap {
+  max-height: 300px !important;
+}
+
+/* 桌面设备上的资质证书显示优化 */
+.qualifications-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 20px;
+}
+
+.qualification-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #e6f0ff;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  border-left: 4px solid #cc0000;
+  align-items: center;
+  text-align: center;
+}
+
+.qualification-image {
+  width: 200px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 5px;
+}
+
+/* ===== 大型桌面设备样式 ===== */
+@media (min-width: 1024px) {
+  .header {
+    padding: 15px 0;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-logo img {
+    height: 50px;
+  }
+  
+  .nav-logo-text {
+    font-size: 24px;
+    display: block;
+  }
+  
+  .nav-menu {
+    gap: 30px;
+    display: flex;
+  }
+  
+  .nav-menu a {
+    font-size: 16px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+}
+
+/* 移动设备样式 */
+@media screen and (max-width: 767px) {
+    /* 首页解决方案网格布局 */
+    .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 首页企业优势网格布局 */
+    .advantage-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .advantage-item {
+        margin-bottom: 20px !important;
+    }
+
+    /* 首页服务项目网格布局 */
+    .service-list {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 首页项目卡片网格布局 */
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 首页新闻卡片网格布局 */
+    .news-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 首页资质证书网格布局 */
+    .qualification-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 首页其他网格布局 */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 首页横幅布局调整 */
+    .banner-content {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    .banner-text {
+        width: 100% !important;
+        margin-bottom: 30px !important;
+    }
+
+    /* 首页服务项目样式调整 */
+    .service-item {
+        margin-bottom: 20px !important;
+    }
+
+    /* 首页关于我们部分调整 */
+    .about-content {
+        flex-direction: column !important;
+    }
+
+    .about-text,
+    .about-image {
+        width: 100% !important;
+    }
 }

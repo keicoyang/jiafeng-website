@@ -101,10 +101,12 @@
 
         .qualification-image {
             width: 100px;
-            height: 70px;
-            object-fit: cover;
+            height: 80px;
+            object-fit: contain;
             border-radius: 4px;
             border: 1px solid var(--border-color);
+            background-color: white;
+            padding: 5px;
         }
 
         /* 按钮样式 */
@@ -194,14 +196,17 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* 图片预览样式 */
+        /* 图片预览 */
         .image-preview {
-            max-width: 200px;
-            max-height: 150px;
+            width: 200px;
+            height: 140px;
+            object-fit: contain;
             margin-top: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
             display: none;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            padding: 5px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -285,28 +290,28 @@
                 title: '物业服务企业资质证书',
                 subtitle: '国家物业管理三级资质',
                 description: '国家物业管理三级资质，具备专业的物业服务能力和管理水平。',
-                image: 'images/qualification1.jpg'
+                image: 'images/membership.PNG'
             },
             {
                 id: 2,
                 title: 'ISO9001质量管理体系认证',
                 subtitle: '质量管理体系认证证书',
                 description: '通过ISO9001质量管理体系认证，确保服务质量的持续提升。',
-                image: 'images/qualification2.jpg'
+                image: 'images/iso9001.PNG'
             },
             {
                 id: 3,
-                title: '安全生产许可证',
-                subtitle: '物业服务安全生产认证',
-                description: '具备完善的安全生产管理体系，确保物业服务安全运营。',
-                image: 'images/qualification3.jpg'
+                title: '上海物业管理协会会员证书',
+                subtitle: '协会会员证书',
+                description: '上海市物业管理行业协会会员单位，遵守行业规范和标准。',
+                image: 'images/membership.PNG'
             },
             {
                 id: 4,
-                title: '环境管理体系认证',
-                subtitle: 'ISO14001环境管理体系认证',
-                description: '通过ISO14001环境管理体系认证，践行绿色物业管理理念。',
-                image: 'images/qualification4.jpg'
+                title: '安全生产管理证书',
+                subtitle: '安全生产标准化认证',
+                description: '安全生产标准化三级企业认证，确保企业安全生产管理体系完善。',
+                image: 'images/iso9001.PNG'
             }
         ];
 
@@ -420,7 +425,7 @@
                 image = qualifications.find(item => item.id === parseInt(id)).image;
             } else {
                 // 如果是新增且没有上传图片，使用默认图片
-                image = 'images/default.jpg';
+                image = 'images/logo.png';
             }
             
             if (id) {
